@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Article</h2>
+                                                 <!-- 강의와 별개로 enctype="multipart/form-data" 사진 수정 변경 추가 -->
+<form action="{% url 'articles:update' article.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">수정</button>
+</form>
+
+<a href="{% url 'articles:article_detail' article.pk %}">이전으로</a>
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}       # 상위 템플릿을 상속받음
+{% load static %}
+
+{% block content %}
+  <h1>철판볶음밥 먹고싶다</h1>
+
+  <img src="{% static 'articles/fried_rice.png' %}" style="width: 300px;">
+  
+  <ul>
+    <li><a href="{% url 'articles:articles' %}">글 목록으로 이동</a></li>
+    <li><a href="{% url 'articles:throw' %}">Throw로 이동</a></li>
+    <li><a href="{% url 'users:users' %}">Users로 이동</a></li>
+  </ul>
+  
+{% endblock content %}
+

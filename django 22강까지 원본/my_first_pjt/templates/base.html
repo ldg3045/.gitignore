@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}  <!-- static 추가 -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  <!-- css 스타일 추가 -->
+    <!-- 스타일 적용 -->
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        a {
+            color: lightblue;
+        }
+
+        .navbar, .container {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        button, input[type="submit"] {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<!--여기까지 헤드 테마 적용 -->
+
+
+<body>
+
+    <div class="navbar">
+
+        {% if request.user.is_authenticated %}
+        <h3>Hello, {{ request.user.username }}</h3>
+        
+        <form action="{% url 'accounts:logout' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="로그아웃">
+        </form>
+
+        <a href="{% url 'accounts:update' %}">회원정보 수정</a>
+
+
+        <form action="{% url "accounts:delete" %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="회원탈퇴"></input>
+        </form>
+
+        {% else %}
+        <a href="{% url 'accounts:login' %}">로그인</a>
+        <a href="{% url 'accounts:signup' %}">회원가입</a>
+        {% endif %}
+
+    </div>
+
+    <div class="container">
+        {% block content %}         
+        {% endblock content %}      
+    </div>
+</body>
+</html>
+
